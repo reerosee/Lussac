@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hukum Perbandingan Volume</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F4FF;--surface:#fff;--surface2:#E8EEFF;
+  --blue:#2563EB;--blue-dim:#BFDBFE;--blue-dark:#1E3A8A;
+  --indigo:#4F46E5;--indigo-dim:#E0E7FF;
+  --text:#1E293B;--muted:#64748B;--border:#DBEAFE;
+}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75}
+
+header{
+  padding:4rem 2rem 3rem;text-align:center;
+  background:linear-gradient(135deg,#1E3A8A 0%,#2563EB 50%,#4F46E5 100%);
+  position:relative;overflow:hidden;
+}
+header::before{
+  content:'';position:absolute;top:-100px;left:-100px;
+  width:400px;height:400px;border-radius:50%;
+  background:rgba(255,255,255,0.05);
+}
+header::after{
+  content:'';position:absolute;bottom:-80px;right:-80px;
+  width:300px;height:300px;border-radius:50%;
+  background:rgba(255,255,255,0.04);
+}
+.chip{display:inline-block;background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,0.25);color:#fff;
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  padding:6px 18px;border-radius:20px;margin-bottom:1.25rem;position:relative}
+header h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.9rem,5vw,3.2rem);
+  font-weight:700;color:#fff;line-height:1.2;position:relative}
+header h1 span{color:#93C5FD}
+.hsub{margin-top:.75rem;color:rgba(255,255,255,0.75);font-size:.9rem;position:relative}
+.blue-rule{width:60px;height:3px;background:rgba(255,255,255,0.4);margin:1.25rem auto 0;border-radius:2px}
+
+.container{max-width:880px;margin:0 auto;padding:3rem 2rem}
+.stag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:.35rem}
+h2{font-family:'Libre Baskerville',serif;font-size:1.75rem;font-weight:700;color:var(--blue-dark);
+  margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid var(--border)}
+p{margin-bottom:1rem;color:var(--text)}
+
+.def-box{background:var(--blue-dark);color:#fff;border-radius:10px;
+  padding:1.75rem 2rem;margin-bottom:3rem;border-left:none;position:relative;overflow:hidden}
+.def-box::before{content:'';position:absolute;top:-30px;right:-30px;width:150px;height:150px;
+  border-radius:50%;background:rgba(255,255,255,0.05)}
+.def-box p{color:#BFDBFE}
+.formula-center{font-family:'Libre Baskerville',serif;font-size:1.3rem;font-weight:700;
+  color:#93C5FD;text-align:center;margin:1rem 0;position:relative}
+
+/* PENEMU */
+.penemu-grid{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;margin-bottom:3rem;align-items:start}
+@media(max-width:580px){.penemu-grid{grid-template-columns:1fr}}
+.pfr{width:190px;height:250px;margin:0 auto;overflow:hidden;border-radius:8px;
+  border:3px solid var(--blue-dim);background:var(--surface2);box-shadow:4px 4px 0 var(--border)}
+.pfr img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pname{margin-top:.7rem;font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;
+  color:var(--blue-dark);text-align:center}
+.pyear{font-size:.78rem;color:var(--muted);text-align:center;margin-top:2px}
+.highlight-box{background:var(--indigo-dim);border-left:4px solid var(--indigo);
+  padding:.85rem 1rem;border-radius:0 6px 6px 0;margin:1rem 0}
+.highlight-box em{color:var(--indigo);font-style:italic}
+
+/* VOLUME VISUAL */
+.vol-section{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:2rem;margin-bottom:3rem;box-shadow:0 2px 8px rgba(37,99,235,0.06)}
+.reaction-equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  gap:.75rem;margin:1.5rem 0;font-family:'Libre Baskerville',serif}
+.re-mol{text-align:center;background:var(--indigo-dim);border:1px solid #C7D2FE;
+  border-radius:8px;padding:.6rem 1rem;min-width:80px}
+.re-formula{font-size:1.15rem;font-weight:700;color:var(--indigo)}
+.re-vol{font-size:.75rem;color:var(--muted);margin-top:2px}
+.re-arrow{font-size:1.5rem;color:var(--blue)}
+.re-plus{font-size:1.2rem;color:var(--muted)}
+
+/* CYLINDER VISUAL */
+.cylinders{display:flex;align-items:flex-end;justify-content:center;gap:1.5rem;
+  flex-wrap:wrap;margin:2rem 0;padding:1rem 0}
+.cyl-group{text-align:center}
+.cyl-label-top{font-size:.75rem;color:var(--muted);margin-bottom:.35rem}
+.cyl{width:50px;border-radius:6px 6px 0 0;position:relative;
+  display:flex;align-items:flex-start;justify-content:center;padding-top:6px}
+.cyl span{font-size:.7rem;font-weight:600;color:#fff}
+.cyl-name{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;color:var(--blue-dark);margin-top:.4rem}
+.cyl-note{font-size:.72rem;color:var(--muted)}
+.cyl-base{width:56px;height:4px;background:var(--blue-dark);border-radius:0 0 2px 2px;margin:0 auto}
+.operator{font-size:1.5rem;color:var(--muted);align-self:center;margin-bottom:30px}
+
+/* TABLE */
+.vol-table{width:100%;border-collapse:collapse;margin-bottom:3rem}
+.vol-table th{background:var(--blue-dark);color:#fff;font-size:.78rem;letter-spacing:1.5px;
+  text-transform:uppercase;padding:.7rem 1rem;text-align:left}
+.vol-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--text)}
+.vol-table tr:nth-child(even) td{background:var(--surface2)}
+.vol-table .hl{color:var(--blue);font-weight:600}
+.vol-table tr:last-child td{border-bottom:none}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:3rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:1.25rem;transition:.2s}
+.card-icon{font-size:1.75rem;margin-bottom:.5rem}
+.card h4{font-family:'Libre Baskerville',serif;font-size:.95rem;font-weight:700;
+  color:var(--blue-dark);margin-bottom:.4rem}
+.card p{font-size:.875rem;color:var(--muted);margin:0;line-height:1.6}
+
+blockquote{border-left:4px solid var(--blue);padding:.85rem 1.25rem;
+  background:var(--blue-dim);border-radius:0 8px 8px 0;margin:0 0 3rem;
+  border-top:none;border-right:none;border-bottom:none}
+blockquote p{font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--blue-dark);font-style:italic;margin:0}
+blockquote cite{display:block;margin-top:.5rem;font-size:.78rem;color:var(--muted);font-style:normal}
+
+.sumlist{list-style:none;padding:0;margin-bottom:2rem}
+.sumlist li{padding:.6rem 0 .6rem 1.5rem;border-bottom:1px solid var(--border);
+  position:relative;color:var(--text);font-size:.95rem}
+.sumlist li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700;font-size:1.1rem}
+
+footer{background:var(--blue-dark);color:rgba(255,255,255,0.6);text-align:center;padding:1.5rem;font-size:.85rem}
+footer span{color:#93C5FD}
+hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="chip">Hukum Dasar Kimia</div>
+  <h1>Hukum <span>Perbandingan Volume</span></h1>
+  <p class="hsub">Law of Combining Volumes · Joseph Louis Gay-Lussac · 1808</p>
+  <div class="blue-rule"></div>
+</header>
+
+<div class="container">
+
+  <section>
+    <p class="stag">Definisi</p>
+    <h2>Apa Itu Hukum Perbandingan Volume?</h2>
+    <div class="def-box">
+      <p>Hukum Perbandingan Volume (Gay-Lussac's Law of Combining Volumes) menyatakan bahwa <strong>pada suhu dan tekanan yang sama, volume gas-gas yang bereaksi dan volume gas-gas hasil reaksi berbanding sebagai bilangan bulat dan sederhana.</strong></p>
+      <p class="formula-center">V₁ : V₂ : V₃ = bilangan bulat sederhana</p>
+      <p style="text-align:center;font-size:.88rem;color:#93C5FD">Berlaku hanya untuk zat berwujud gas, pada kondisi suhu (T) dan tekanan (P) yang sama.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="stag">Sang Penemu</p>
+    <h2>Joseph Louis Gay-Lussac</h2>
+    <div class="penemu-grid">
+      <div>
+        <div class="pfr">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Joseph_Louis_Gay-Lussac.jpg/440px-Joseph_Louis_Gay-Lussac.jpg"
+               alt="Joseph Louis Gay-Lussac"
+               onerror="this.parentElement.innerHTML='<div style=\'height:100%;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem\'>Gay-Lussac</div>'"/>
+        </div>
+        <p class="pname">Joseph Louis Gay-Lussac</p>
+        <p class="pyear">6 Des 1778 — 9 Mei 1850</p>
+        <p class="pyear">Saint-Léonard, Prancis</p>
+      </div>
+      <div>
+        <p>Joseph Louis Gay-Lussac adalah fisikawan dan kimiawan Prancis yang terkenal dengan berbagai kontribusi pada ilmu gas. Ia adalah salah satu ilmuwan paling produktif di awal abad ke-19.</p>
+        <div class="highlight-box">
+          <em>"Gay-Lussac tidak hanya duduk di laboratorium — ia terbang dengan balon udara ke ketinggian 7.016 meter demi mengambil sampel udara untuk penelitiannya. Sebuah rekor dunia pada zamannya (1804)."</em>
+        </div>
+        <p>Selain hukum perbandingan volume, Gay-Lussac juga menemukan <strong>Hukum Gay-Lussac</strong> tentang hubungan tekanan dan suhu gas (P ∝ T), serta turut mengidentifikasi boron sebagai unsur baru bersama Thenard.</p>
+        <p>Penemuannya tentang volume gas yang bereaksi menginspirasi Avogadro untuk merumuskan hipotesisnya tentang jumlah molekul dalam volume gas yang sama.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="vol-section">
+    <p class="stag">Visualisasi Reaksi</p>
+    <h2 style="color:var(--blue-dark)">Reaksi Gas H₂ + O₂ → H₂O</h2>
+
+    <div class="reaction-equation">
+      <div class="re-mol">
+        <div class="re-formula">2H₂</div>
+        <div class="re-vol">2 volume</div>
+      </div>
+      <span class="re-plus">+</span>
+      <div class="re-mol">
+        <div class="re-formula">O₂</div>
+        <div class="re-vol">1 volume</div>
+      </div>
+      <span class="re-arrow">→</span>
+      <div class="re-mol" style="background:#D1FAE5;border-color:#6EE7B7">
+        <div class="re-formula" style="color:#065F46">2H₂O</div>
+        <div class="re-vol">2 volume (uap)</div>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:.85rem;color:var(--muted)">Rasio volume: H₂ : O₂ : H₂O = <strong style="color:var(--blue)">2 : 1 : 2</strong> — bilangan bulat sederhana ✓</p>
+
+    <!-- CYLINDERS -->
+    <div class="cylinders">
+      <div class="cyl-group">
+        <div class="cyl-label-top">Hidrogen</div>
+        <div class="cyl" style="height:80px;background:#3B82F6"><span>H₂</span></div>
+        <div class="cyl-base"></div>
+        <div class="cyl-name">2 vol</div>
+      </div>
+      <div class="operator">+</div>
+      <div class="cyl-group">
+        <div class="cyl-label-top">Oksigen</div>
+        <div class="cyl" style="height:40px;background:#F59E0B"><span>O₂</span></div>
+        <div class="cyl-base"></div>
+        <div class="cyl-name">1 vol</div>
+      </div>
+      <div class="operator">→</div>
+      <div class="cyl-group">
+        <div class="cyl-label-top">Uap Air</div>
+        <div class="cyl" style="height:80px;background:#10B981"><span>H₂O</span></div>
+        <div class="cyl-base"></div>
+        <div class="cyl-name">2 vol</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.78rem;color:var(--muted)">* Tinggi silinder merepresentasikan perbandingan volume relatif pada P dan T sama</p>
+  </div>
+
+  <section>
+    <p class="stag">Data Eksperimen</p>
+    <h2>Tabel Perbandingan Volume Berbagai Reaksi Gas</h2>
+    <table class="vol-table">
+      <thead>
+        <tr><th>Reaksi</th><th>Gas A (vol)</th><th>Gas B (vol)</th><th>Produk (vol)</th><th>Rasio Bulat</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>H₂ + Cl₂ → 2HCl</td>
+          <td>1 (H₂)</td><td>1 (Cl₂)</td><td class="hl">2 (HCl)</td><td class="hl">1:1:2</td>
+        </tr>
+        <tr>
+          <td>N₂ + 3H₂ → 2NH₃</td>
+          <td>1 (N₂)</td><td>3 (H₂)</td><td class="hl">2 (NH₃)</td><td class="hl">1:3:2</td>
+        </tr>
+        <tr>
+          <td>2H₂ + O₂ → 2H₂O</td>
+          <td>2 (H₂)</td><td>1 (O₂)</td><td class="hl">2 (H₂O uap)</td><td class="hl">2:1:2</td>
+        </tr>
+        <tr>
+          <td>CO + ½O₂ → CO₂</td>
+          <td>2 (CO)</td><td>1 (O₂)</td><td class="hl">2 (CO₂)</td><td class="hl">2:1:2</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <p class="stag">Aplikasi</p>
+    <h2>Penerapan dalam Kehidupan</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h4>Bahan Bakar Roket</h4>
+        <p>Menghitung rasio H₂ cair dan O₂ cair yang diperlukan untuk pembakaran optimal pada mesin roket.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏭</div>
+        <h4>Sintesis Amonia</h4>
+        <p>Proses Haber-Bosch: N₂ + 3H₂ → 2NH₃, rasio volume N₂:H₂ = 1:3 dioptimalkan berdasarkan hukum ini.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h4>Sel Bahan Bakar</h4>
+        <p>Fuel cell H₂-O₂ menggunakan rasio gas yang tepat untuk menghasilkan listrik dan air tanpa polusi.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔬</div>
+        <h4>Analisis Gas</h4>
+        <p>Menentukan komposisi campuran gas industri dan memastikan rasio yang aman sebelum pembakaran.</p>
+      </div>
+    </div>
+  </section>
+
+  <blockquote>
+    <p>"Volume gas-gas yang bereaksi dan hasil reaksi, diukur pada suhu dan tekanan yang sama, selalu berbanding sebagai bilangan bulat yang sangat sederhana."</p>
+    <cite>— Joseph Louis Gay-Lussac, Mémoires de la Société d'Arcueil, 1808</cite>
+  </blockquote>
+
+  <hr/>
+
+  <section>
+    <p class="stag">Rangkuman</p>
+    <h2>Poin-Poin Kunci</h2>
+    <ul class="sumlist">
+      <li>Volume gas-gas yang bereaksi dan produk berbanding sebagai bilangan bulat sederhana.</li>
+      <li>Hukum berlaku hanya pada kondisi suhu (T) dan tekanan (P) yang sama.</li>
+      <li>Dikemukakan oleh Gay-Lussac tahun 1808 setelah observasi berbagai reaksi gas.</li>
+      <li>Menjadi dasar bagi Hipotesis Avogadro (1811) tentang jumlah partikel gas.</li>
+      <li>Contoh: H₂ + Cl₂ → 2HCl — rasio volume 1:1:2 (bilangan bulat sederhana).</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <p>Materi Kimia · <span>Hukum Perbandingan Volume</span> · Gay-Lussac (1808)</p>
+</footer>
+</body>
+</html>
