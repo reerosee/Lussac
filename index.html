@@ -8,17 +8,28 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F0F4FF;--surface:#fff;--surface2:#E8EEFF;
-  --blue:#2563EB;--blue-dim:#BFDBFE;--blue-dark:#1E3A8A;
-  --indigo:#4F46E5;--indigo-dim:#E0E7FF;
-  --text:#1E293B;--muted:#64748B;--border:#DBEAFE;
+  --bg:#FFF7ED;
+  --surface:#FFFFFF;
+  --surface2:#FFEDD5;
+  --orange:#F97316;
+  --orange-dark:#C2410C;
+  --orange-deep:#7C2D12;
+  --orange-bright:#FB923C;
+  --orange-light:#FED7AA;
+  --orange-pale:#FEF3C7;
+  --yellow:#FBBF24;
+  --text:#431407;
+  --muted:#9A3412;
+  --border:rgba(249,115,22,0.22);
+  --border-strong:rgba(249,115,22,0.45);
 }
 body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75}
 
 header{
   padding:4rem 2rem 3rem;text-align:center;
-  background:linear-gradient(135deg,#1E3A8A 0%,#2563EB 50%,#4F46E5 100%);
+  background:linear-gradient(135deg,#92400E 0%,#C2410C 25%,#EA580C 55%,#F97316 80%,#FBBF24 100%);
   position:relative;overflow:hidden;
+  border-bottom:3px solid var(--orange-dark);
 }
 header::before{
   content:'';position:absolute;top:-100px;left:-100px;
@@ -30,53 +41,59 @@ header::after{
   width:300px;height:300px;border-radius:50%;
   background:rgba(255,255,255,0.04);
 }
-.chip{display:inline-block;background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);
-  border:1px solid rgba(255,255,255,0.25);color:#fff;
+.chip{display:inline-block;background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,0.3);color:#fff;
   font-size:11px;letter-spacing:4px;text-transform:uppercase;
   padding:6px 18px;border-radius:20px;margin-bottom:1.25rem;position:relative}
 header h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.9rem,5vw,3.2rem);
-  font-weight:700;color:#fff;line-height:1.2;position:relative}
-header h1 span{color:#93C5FD}
-.hsub{margin-top:.75rem;color:rgba(255,255,255,0.75);font-size:.9rem;position:relative}
-.blue-rule{width:60px;height:3px;background:rgba(255,255,255,0.4);margin:1.25rem auto 0;border-radius:2px}
+  font-weight:700;color:#fff;line-height:1.2;position:relative;
+  text-shadow:0 2px 8px rgba(124,45,18,0.4)}
+header h1 span{color:#FEF9C3}
+.hsub{margin-top:.75rem;color:rgba(255,255,255,0.8);font-size:.9rem;position:relative}
+.blue-rule{width:60px;height:3px;background:rgba(255,255,255,0.5);margin:1.25rem auto 0;border-radius:2px}
 
 .container{max-width:880px;margin:0 auto;padding:3rem 2rem}
-.stag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:.35rem}
-h2{font-family:'Libre Baskerville',serif;font-size:1.75rem;font-weight:700;color:var(--blue-dark);
-  margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid var(--border)}
+.stag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange-dark);margin-bottom:.35rem;font-weight:600}
+h2{font-family:'Libre Baskerville',serif;font-size:1.75rem;font-weight:700;color:var(--orange-deep);
+  margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid var(--border-strong)}
 p{margin-bottom:1rem;color:var(--text)}
 
-.def-box{background:var(--blue-dark);color:#fff;border-radius:10px;
-  padding:1.75rem 2rem;margin-bottom:3rem;border-left:none;position:relative;overflow:hidden}
+.def-box{background:linear-gradient(135deg,var(--orange-deep) 0%,var(--orange-dark) 50%,var(--orange) 100%);
+  color:#fff;border-radius:12px;padding:1.75rem 2rem;margin-bottom:3rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 32px rgba(234,88,12,0.35)}
 .def-box::before{content:'';position:absolute;top:-30px;right:-30px;width:150px;height:150px;
-  border-radius:50%;background:rgba(255,255,255,0.05)}
-.def-box p{color:#BFDBFE}
+  border-radius:50%;background:rgba(255,255,255,0.06)}
+.def-box p{color:#FED7AA}
 .formula-center{font-family:'Libre Baskerville',serif;font-size:1.3rem;font-weight:700;
-  color:#93C5FD;text-align:center;margin:1rem 0;position:relative}
+  color:#FEF9C3;text-align:center;margin:1rem 0;position:relative;
+  background:rgba(0,0,0,0.2);border-radius:6px;padding:.5rem 1rem}
 
 /* PENEMU */
 .penemu-grid{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;margin-bottom:3rem;align-items:start}
 @media(max-width:580px){.penemu-grid{grid-template-columns:1fr}}
-.pfr{width:190px;height:250px;margin:0 auto;overflow:hidden;border-radius:8px;
-  border:3px solid var(--blue-dim);background:var(--surface2);box-shadow:4px 4px 0 var(--border)}
+.pfr{width:190px;height:250px;margin:0 auto;overflow:hidden;border-radius:10px;
+  border:3px solid var(--orange);background:var(--surface2);
+  box-shadow:6px 6px 0 var(--orange-light)}
 .pfr img{width:100%;height:100%;object-fit:cover;object-position:top}
 .pname{margin-top:.7rem;font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;
-  color:var(--blue-dark);text-align:center}
+  color:var(--orange-deep);text-align:center}
 .pyear{font-size:.78rem;color:var(--muted);text-align:center;margin-top:2px}
-.highlight-box{background:var(--indigo-dim);border-left:4px solid var(--indigo);
-  padding:.85rem 1rem;border-radius:0 6px 6px 0;margin:1rem 0}
-.highlight-box em{color:var(--indigo);font-style:italic}
+.highlight-box{background:var(--surface2);border-left:4px solid var(--orange);
+  padding:.85rem 1rem;border-radius:0 8px 8px 0;margin:1rem 0;
+  box-shadow:inset 0 0 0 1px var(--border)}
+.highlight-box em{color:var(--orange-dark);font-style:italic}
 
 /* VOLUME VISUAL */
-.vol-section{background:var(--surface);border:1px solid var(--border);border-radius:10px;
-  padding:2rem;margin-bottom:3rem;box-shadow:0 2px 8px rgba(37,99,235,0.06)}
+.vol-section{background:var(--surface);border:2px solid var(--orange-light);border-radius:12px;
+  padding:2rem;margin-bottom:3rem;box-shadow:0 4px 16px rgba(249,115,22,0.1)}
 .reaction-equation{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
   gap:.75rem;margin:1.5rem 0;font-family:'Libre Baskerville',serif}
-.re-mol{text-align:center;background:var(--indigo-dim);border:1px solid #C7D2FE;
+.re-mol{text-align:center;background:var(--surface2);border:2px solid var(--orange-light);
   border-radius:8px;padding:.6rem 1rem;min-width:80px}
-.re-formula{font-size:1.15rem;font-weight:700;color:var(--indigo)}
+.re-formula{font-size:1.15rem;font-weight:700;color:var(--orange-dark)}
 .re-vol{font-size:.75rem;color:var(--muted);margin-top:2px}
-.re-arrow{font-size:1.5rem;color:var(--blue)}
+.re-arrow{font-size:1.5rem;color:var(--orange)}
 .re-plus{font-size:1.2rem;color:var(--muted)}
 
 /* CYLINDER VISUAL */
@@ -84,46 +101,48 @@ p{margin-bottom:1rem;color:var(--text)}
   flex-wrap:wrap;margin:2rem 0;padding:1rem 0}
 .cyl-group{text-align:center}
 .cyl-label-top{font-size:.75rem;color:var(--muted);margin-bottom:.35rem}
-.cyl{width:50px;border-radius:6px 6px 0 0;position:relative;
-  display:flex;align-items:flex-start;justify-content:center;padding-top:6px}
-.cyl span{font-size:.7rem;font-weight:600;color:#fff}
-.cyl-name{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;color:var(--blue-dark);margin-top:.4rem}
+.cyl{width:50px;border-radius:8px 8px 0 0;position:relative;
+  display:flex;align-items:flex-start;justify-content:center;padding-top:6px;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,0.3)}
+.cyl span{font-size:.7rem;font-weight:700;color:#fff}
+.cyl-name{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;color:var(--orange-deep);margin-top:.4rem}
 .cyl-note{font-size:.72rem;color:var(--muted)}
-.cyl-base{width:56px;height:4px;background:var(--blue-dark);border-radius:0 0 2px 2px;margin:0 auto}
+.cyl-base{width:56px;height:4px;background:var(--orange-deep);border-radius:0 0 4px 4px;margin:0 auto}
 .operator{font-size:1.5rem;color:var(--muted);align-self:center;margin-bottom:30px}
 
 /* TABLE */
-.vol-table{width:100%;border-collapse:collapse;margin-bottom:3rem}
-.vol-table th{background:var(--blue-dark);color:#fff;font-size:.78rem;letter-spacing:1.5px;
-  text-transform:uppercase;padding:.7rem 1rem;text-align:left}
-.vol-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);font-size:.9rem;color:var(--text)}
+.vol-table{width:100%;border-collapse:collapse;margin-bottom:3rem;border-radius:10px;overflow:hidden;
+  box-shadow:0 2px 12px rgba(249,115,22,0.12)}
+.vol-table th{background:linear-gradient(90deg,var(--orange-deep),var(--orange-dark));
+  color:#fff;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;padding:.7rem 1rem;text-align:left}
+.vol-table td{padding:.7rem 1rem;border-bottom:1px solid var(--orange-light);font-size:.9rem;color:var(--text);background:var(--surface)}
 .vol-table tr:nth-child(even) td{background:var(--surface2)}
-.vol-table .hl{color:var(--blue);font-weight:600}
+.vol-table .hl{color:var(--orange-dark);font-weight:600}
 .vol-table tr:last-child td{border-bottom:none}
 
 /* CARDS */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:3rem}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;
-  padding:1.25rem;transition:.2s}
+.card{background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;
+  padding:1.25rem;border-top:4px solid var(--orange)}
 .card-icon{font-size:1.75rem;margin-bottom:.5rem}
 .card h4{font-family:'Libre Baskerville',serif;font-size:.95rem;font-weight:700;
-  color:var(--blue-dark);margin-bottom:.4rem}
+  color:var(--orange-deep);margin-bottom:.4rem}
 .card p{font-size:.875rem;color:var(--muted);margin:0;line-height:1.6}
 
-blockquote{border-left:4px solid var(--blue);padding:.85rem 1.25rem;
-  background:var(--blue-dim);border-radius:0 8px 8px 0;margin:0 0 3rem;
-  border-top:none;border-right:none;border-bottom:none}
-blockquote p{font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--blue-dark);font-style:italic;margin:0}
+blockquote{border-left:4px solid var(--orange);padding:.85rem 1.25rem;
+  background:var(--surface2);border-radius:0 8px 8px 0;margin:0 0 3rem}
+blockquote p{font-family:'Libre Baskerville',serif;font-size:1.1rem;color:var(--orange-dark);font-style:italic;margin:0}
 blockquote cite{display:block;margin-top:.5rem;font-size:.78rem;color:var(--muted);font-style:normal}
 
 .sumlist{list-style:none;padding:0;margin-bottom:2rem}
 .sumlist li{padding:.6rem 0 .6rem 1.5rem;border-bottom:1px solid var(--border);
   position:relative;color:var(--text);font-size:.95rem}
-.sumlist li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700;font-size:1.1rem}
+.sumlist li::before{content:'›';position:absolute;left:0;color:var(--orange);font-weight:700;font-size:1.1rem}
 
-footer{background:var(--blue-dark);color:rgba(255,255,255,0.6);text-align:center;padding:1.5rem;font-size:.85rem}
-footer span{color:#93C5FD}
-hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
+footer{background:linear-gradient(90deg,var(--orange-deep),var(--orange-dark));
+  color:rgba(255,255,255,0.7);text-align:center;padding:1.5rem;font-size:.85rem}
+footer span{color:var(--orange-light)}
+hr{border:none;border-top:2px solid var(--orange-light);margin:2.5rem 0}
 </style>
 </head>
 <body>
@@ -131,7 +150,7 @@ hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
 <header>
   <div class="chip">Hukum Dasar Kimia</div>
   <h1>Hukum <span>Perbandingan Volume</span></h1>
-  <p class="hsub">Law of Combining Volumes · Joseph Louis Gay-Lussac · 1808</p>
+  <p class="hsub">Joseph Louis Gay-Lussac · 1808</p>
   <div class="blue-rule"></div>
 </header>
 
@@ -143,7 +162,7 @@ hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
     <div class="def-box">
       <p>Hukum Perbandingan Volume (Gay-Lussac's Law of Combining Volumes) menyatakan bahwa <strong>pada suhu dan tekanan yang sama, volume gas-gas yang bereaksi dan volume gas-gas hasil reaksi berbanding sebagai bilangan bulat dan sederhana.</strong></p>
       <p class="formula-center">V₁ : V₂ : V₃ = bilangan bulat sederhana</p>
-      <p style="text-align:center;font-size:.88rem;color:#93C5FD">Berlaku hanya untuk zat berwujud gas, pada kondisi suhu (T) dan tekanan (P) yang sama.</p>
+      <p style="text-align:center;font-size:.88rem;color:rgba(255,255,255,0.75)">Berlaku hanya untuk zat berwujud gas, pada kondisi suhu (T) dan tekanan (P) yang sama.</p>
     </div>
   </section>
 
@@ -174,7 +193,7 @@ hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
 
   <div class="vol-section">
     <p class="stag">Visualisasi Reaksi</p>
-    <h2 style="color:var(--blue-dark)">Reaksi Gas H₂ + O₂ → H₂O</h2>
+    <h2>Reaksi Gas H₂ + O₂ → H₂O</h2>
 
     <div class="reaction-equation">
       <div class="re-mol">
@@ -187,33 +206,33 @@ hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
         <div class="re-vol">1 volume</div>
       </div>
       <span class="re-arrow">→</span>
-      <div class="re-mol" style="background:#D1FAE5;border-color:#6EE7B7">
-        <div class="re-formula" style="color:#065F46">2H₂O</div>
+      <div class="re-mol" style="background:var(--orange-pale);border-color:var(--orange)">
+        <div class="re-formula" style="color:var(--orange-deep)">2H₂O</div>
         <div class="re-vol">2 volume (uap)</div>
       </div>
     </div>
 
-    <p style="text-align:center;font-size:.85rem;color:var(--muted)">Rasio volume: H₂ : O₂ : H₂O = <strong style="color:var(--blue)">2 : 1 : 2</strong> — bilangan bulat sederhana ✓</p>
+    <p style="text-align:center;font-size:.85rem;color:var(--muted)">Rasio volume: H₂ : O₂ : H₂O = <strong style="color:var(--orange-dark)">2 : 1 : 2</strong> — bilangan bulat sederhana ✓</p>
 
     <!-- CYLINDERS -->
     <div class="cylinders">
       <div class="cyl-group">
         <div class="cyl-label-top">Hidrogen</div>
-        <div class="cyl" style="height:80px;background:#3B82F6"><span>H₂</span></div>
+        <div class="cyl" style="height:80px;background:var(--orange-bright)"><span>H₂</span></div>
         <div class="cyl-base"></div>
         <div class="cyl-name">2 vol</div>
       </div>
       <div class="operator">+</div>
       <div class="cyl-group">
         <div class="cyl-label-top">Oksigen</div>
-        <div class="cyl" style="height:40px;background:#F59E0B"><span>O₂</span></div>
+        <div class="cyl" style="height:40px;background:var(--orange-dark)"><span>O₂</span></div>
         <div class="cyl-base"></div>
         <div class="cyl-name">1 vol</div>
       </div>
       <div class="operator">→</div>
       <div class="cyl-group">
         <div class="cyl-label-top">Uap Air</div>
-        <div class="cyl" style="height:80px;background:#10B981"><span>H₂O</span></div>
+        <div class="cyl" style="height:80px;background:var(--yellow)"><span style="color:var(--orange-deep)">H₂O</span></div>
         <div class="cyl-base"></div>
         <div class="cyl-name">2 vol</div>
       </div>
@@ -298,7 +317,7 @@ hr{border:none;border-top:1px solid var(--border);margin:2.5rem 0}
 </div>
 
 <footer>
-  <p>Materi Kimia · <span>Hukum Perbandingan Volume</span> · Gay-Lussac (1808)</p>
+  <p><span>Hukum Perbandingan Volume</span> · Gay-Lussac (1808)</p>
 </footer>
 </body>
 </html>
