@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden}
 :root{
   --bg:#FFF7ED;
   --surface:#FFFFFF;
@@ -23,7 +24,8 @@
   --border:rgba(249,115,22,0.22);
   --border-strong:rgba(249,115,22,0.45);
 }
-body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;font-size:16px;line-height:1.75;
+  overflow-x:hidden;max-width:100vw}
 
 header{
   padding:4rem 2rem 3rem;text-align:center;
@@ -45,9 +47,9 @@ header::after{
   border:1px solid rgba(255,255,255,0.3);color:#fff;
   font-size:11px;letter-spacing:4px;text-transform:uppercase;
   padding:6px 18px;border-radius:20px;margin-bottom:1.25rem;position:relative}
-header h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.9rem,5vw,3.2rem);
-  font-weight:700;color:#fff;line-height:1.2;position:relative;
-  text-shadow:0 2px 8px rgba(124,45,18,0.4)}
+header h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.6rem,7vw,3.2rem);
+  font-weight:700;color:#fff;line-height:1.25;position:relative;
+  text-shadow:0 2px 8px rgba(124,45,18,0.4);word-wrap:break-word}
 header h1 span{color:#FEF9C3}
 .hsub{margin-top:.75rem;color:rgba(255,255,255,0.8);font-size:.9rem;position:relative}
 .blue-rule{width:60px;height:3px;background:rgba(255,255,255,0.5);margin:1.25rem auto 0;border-radius:2px}
@@ -55,7 +57,7 @@ header h1 span{color:#FEF9C3}
 .container{max-width:880px;margin:0 auto;padding:3rem 2rem}
 .stag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange-dark);margin-bottom:.35rem;font-weight:600}
 h2{font-family:'Libre Baskerville',serif;font-size:1.75rem;font-weight:700;color:var(--orange-deep);
-  margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid var(--border-strong)}
+  margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:2px solid var(--border-strong);word-wrap:break-word}
 p{margin-bottom:1rem;color:var(--text)}
 
 .def-box{background:linear-gradient(135deg,var(--orange-deep) 0%,var(--orange-dark) 50%,var(--orange) 100%);
@@ -71,7 +73,6 @@ p{margin-bottom:1rem;color:var(--text)}
 
 /* PENEMU */
 .penemu-grid{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;margin-bottom:3rem;align-items:start}
-@media(max-width:580px){.penemu-grid{grid-template-columns:1fr}}
 .pfr{width:190px;height:250px;margin:0 auto;overflow:hidden;border-radius:10px;
   border:3px solid var(--orange);background:var(--surface2);
   box-shadow:6px 6px 0 var(--orange-light)}
@@ -88,46 +89,41 @@ p{margin-bottom:1rem;color:var(--text)}
 .vol-section{background:var(--surface);border:2px solid var(--orange-light);border-radius:12px;
   padding:2rem;margin-bottom:3rem;box-shadow:0 4px 16px rgba(249,115,22,0.1)}
 
-/* Reaction equation: forced single line, never wraps */
-.reaction-equation{display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;
+/* Reaction equation: forced single line, scrolls instead of clipping if too narrow */
+.reaction-equation{display:flex;align-items:center;justify-content:flex-start;flex-wrap:nowrap;
   gap:.6rem;margin:1.5rem 0;font-family:'Libre Baskerville',serif;
-  overflow-x:auto;padding:.25rem .25rem .5rem}
+  overflow-x:auto;-webkit-overflow-scrolling:touch;padding:.25rem .25rem .5rem}
 .re-mol{text-align:center;background:var(--surface2);border:2px solid var(--orange-light);
   border-radius:8px;padding:.6rem .85rem;min-width:72px;flex:0 0 auto}
 .re-formula{font-size:1.15rem;font-weight:700;color:var(--orange-dark);white-space:nowrap}
 .re-vol{font-size:.72rem;color:var(--muted);margin-top:2px;white-space:nowrap}
 .re-arrow{font-size:1.5rem;color:var(--orange);flex:0 0 auto}
 .re-plus{font-size:1.2rem;color:var(--muted);flex:0 0 auto}
-@media(max-width:480px){
-  .reaction-equation{gap:.4rem}
-  .re-mol{min-width:60px;padding:.5rem .6rem}
-  .re-formula{font-size:.95rem}
-  .re-vol{font-size:.65rem}
-  .re-arrow{font-size:1.2rem}
-}
 
-/* CYLINDER VISUAL — grid keeps all bases perfectly aligned on one row */
+/* CYLINDER VISUAL — grid keeps all bases perfectly aligned on one row, scrolls on very narrow screens */
+.cyl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:2rem 0;padding:1rem 0 .5rem}
 .cylinders{display:grid;grid-auto-flow:column;grid-auto-columns:min-content;
-  align-items:end;justify-content:center;column-gap:1.5rem;margin:2rem 0;padding:1rem 0}
+  align-items:end;justify-content:center;column-gap:1.5rem;width:max-content;margin:0 auto}
 .cyl-group{text-align:center;display:flex;flex-direction:column;align-items:center}
-.cyl-label-top{font-size:.75rem;color:var(--muted);margin-bottom:.35rem;height:1.1em}
+.cyl-label-top{font-size:.75rem;color:var(--muted);margin-bottom:.35rem;height:1.1em;white-space:nowrap}
 .cyl{width:50px;border-radius:8px 8px 0 0;position:relative;
   display:flex;align-items:flex-start;justify-content:center;padding-top:6px;
   box-shadow:inset 0 2px 0 rgba(255,255,255,0.3);align-self:flex-end}
 .cyl span{font-size:.7rem;font-weight:700;color:#fff}
-.cyl-name{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;color:var(--orange-deep);margin-top:.4rem}
+.cyl-name{font-family:'Libre Baskerville',serif;font-size:.9rem;font-weight:700;color:var(--orange-deep);margin-top:.4rem;white-space:nowrap}
 .cyl-note{font-size:.72rem;color:var(--muted)}
 .cyl-base{width:56px;height:4px;background:var(--orange-deep);border-radius:0 0 4px 4px;margin:0 auto}
 .operator-group{align-self:flex-end;padding-bottom:4px}
 .operator-group .operator{font-size:1.5rem;color:var(--muted)}
 
-/* TABLE */
-.vol-table{width:100%;border-collapse:collapse;margin-bottom:3rem;border-radius:10px;overflow:hidden;
+/* TABLE — wrapped so it scrolls instead of getting clipped on narrow screens */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:3rem;border-radius:10px;
   box-shadow:0 2px 12px rgba(249,115,22,0.12)}
+.vol-table{width:100%;min-width:520px;border-collapse:collapse}
 .vol-table th{background:linear-gradient(90deg,var(--orange-deep),var(--orange-dark));
-  color:#fff;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;padding:.7rem 1rem;text-align:left}
+  color:#fff;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;padding:.7rem 1rem;text-align:left;white-space:nowrap}
 .vol-table th:not(:first-child){text-align:right}
-.vol-table td{padding:.7rem 1rem;border-bottom:1px solid var(--orange-light);font-size:.9rem;color:var(--text);background:var(--surface)}
+.vol-table td{padding:.7rem 1rem;border-bottom:1px solid var(--orange-light);font-size:.9rem;color:var(--text);background:var(--surface);white-space:nowrap}
 .vol-table td:not(:first-child){text-align:right}
 .vol-table tr:nth-child(even) td{background:var(--surface2)}
 .vol-table .hl{color:var(--orange-dark);font-weight:600}
@@ -136,7 +132,7 @@ p{margin-bottom:1rem;color:var(--text)}
 /* CARDS */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:3rem}
 .card{background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;
-  padding:1.25rem;border-top:4px solid var(--orange)}
+  padding:1.25rem;border-top:4px solid var(--orange);min-width:0}
 .card-icon{font-size:1.75rem;margin-bottom:.5rem}
 .card h4{font-family:'Libre Baskerville',serif;font-size:.95rem;font-weight:700;
   color:var(--orange-deep);margin-bottom:.4rem}
@@ -156,6 +152,60 @@ footer{background:linear-gradient(90deg,var(--orange-deep),var(--orange-dark));
   color:rgba(255,255,255,0.7);text-align:center;padding:1.5rem;font-size:.85rem}
 footer span{color:var(--orange-light)}
 hr{border:none;border-top:2px solid var(--orange-light);margin:2.5rem 0}
+
+/* ===== RESPONSIVE: TABLET ===== */
+@media(max-width:720px){
+  .container{padding:2.5rem 1.5rem}
+  .penemu-grid{grid-template-columns:1fr;gap:1.5rem}
+  .pfr{width:160px;height:210px}
+}
+
+/* ===== RESPONSIVE: MOBILE (smartphone) ===== */
+@media(max-width:600px){
+  header{padding:2.75rem 1.25rem 2.25rem}
+  .chip{font-size:10px;letter-spacing:3px;padding:5px 14px}
+  .hsub{font-size:.82rem}
+  .container{padding:2rem 1.1rem}
+  h2{font-size:1.35rem}
+  .def-box{padding:1.35rem 1.25rem}
+  .def-box p{font-size:.92rem}
+  .vol-section{padding:1.25rem 1rem}
+  .pfr{width:140px;height:185px}
+  .highlight-box{padding:.7rem .85rem;font-size:.9rem}
+
+  .reaction-equation{gap:.4rem;justify-content:flex-start}
+  .re-mol{min-width:64px;padding:.5rem .55rem}
+  .re-formula{font-size:.95rem}
+  .re-vol{font-size:.62rem}
+  .re-arrow{font-size:1.15rem}
+  .re-plus{font-size:1rem}
+
+  .cylinders{column-gap:1rem}
+  .cyl{width:42px}
+  .cyl-base{width:48px}
+  .cyl-label-top{font-size:.68rem}
+  .cyl-name{font-size:.8rem}
+  .operator-group .operator{font-size:1.2rem}
+
+  .vol-table th,.vol-table td{padding:.55rem .7rem;font-size:.82rem}
+
+  .cards{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem}
+  .card{padding:1rem}
+  .card h4{font-size:.88rem}
+  .card p{font-size:.8rem}
+
+  blockquote p{font-size:1rem}
+  .sumlist li{font-size:.9rem;padding-left:1.25rem}
+}
+
+@media(max-width:380px){
+  header h1{font-size:1.55rem}
+  .cylinders{column-gap:.65rem}
+  .cyl{width:36px}
+  .cyl-base{width:42px}
+  .re-mol{min-width:56px;padding:.45rem .45rem}
+  .cards{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
@@ -227,32 +277,34 @@ hr{border:none;border-top:2px solid var(--orange-light);margin:2.5rem 0}
     <p style="text-align:center;font-size:.85rem;color:var(--muted)">Rasio volume: H₂ : O₂ : H₂O = <strong style="color:var(--orange-dark)">2 : 1 : 2</strong> — bilangan bulat sederhana ✓</p>
 
     <!-- CYLINDERS -->
-    <div class="cylinders">
-      <div class="cyl-group">
-        <div class="cyl-label-top">Hidrogen</div>
-        <div class="cyl" style="height:80px;background:var(--orange-bright)"><span>H₂</span></div>
-        <div class="cyl-base"></div>
-        <div class="cyl-name">2 vol</div>
-      </div>
-      <div class="cyl-group operator-group">
-        <div class="cyl-label-top" aria-hidden="true"></div>
-        <div class="operator">+</div>
-      </div>
-      <div class="cyl-group">
-        <div class="cyl-label-top">Oksigen</div>
-        <div class="cyl" style="height:40px;background:var(--orange-dark)"><span>O₂</span></div>
-        <div class="cyl-base"></div>
-        <div class="cyl-name">1 vol</div>
-      </div>
-      <div class="cyl-group operator-group">
-        <div class="cyl-label-top" aria-hidden="true"></div>
-        <div class="operator">→</div>
-      </div>
-      <div class="cyl-group">
-        <div class="cyl-label-top">Uap Air</div>
-        <div class="cyl" style="height:80px;background:var(--yellow)"><span style="color:var(--orange-deep)">H₂O</span></div>
-        <div class="cyl-base"></div>
-        <div class="cyl-name">2 vol</div>
+    <div class="cyl-scroll">
+      <div class="cylinders">
+        <div class="cyl-group">
+          <div class="cyl-label-top">Hidrogen</div>
+          <div class="cyl" style="height:80px;background:var(--orange-bright)"><span>H₂</span></div>
+          <div class="cyl-base"></div>
+          <div class="cyl-name">2 vol</div>
+        </div>
+        <div class="cyl-group operator-group">
+          <div class="cyl-label-top" aria-hidden="true"></div>
+          <div class="operator">+</div>
+        </div>
+        <div class="cyl-group">
+          <div class="cyl-label-top">Oksigen</div>
+          <div class="cyl" style="height:40px;background:var(--orange-dark)"><span>O₂</span></div>
+          <div class="cyl-base"></div>
+          <div class="cyl-name">1 vol</div>
+        </div>
+        <div class="cyl-group operator-group">
+          <div class="cyl-label-top" aria-hidden="true"></div>
+          <div class="operator">→</div>
+        </div>
+        <div class="cyl-group">
+          <div class="cyl-label-top">Uap Air</div>
+          <div class="cyl" style="height:80px;background:var(--yellow)"><span style="color:var(--orange-deep)">H₂O</span></div>
+          <div class="cyl-base"></div>
+          <div class="cyl-name">2 vol</div>
+        </div>
       </div>
     </div>
     <p style="text-align:center;font-size:.78rem;color:var(--muted)">* Tinggi silinder merepresentasikan perbandingan volume relatif pada P dan T sama</p>
@@ -261,29 +313,31 @@ hr{border:none;border-top:2px solid var(--orange-light);margin:2.5rem 0}
   <section>
     <p class="stag">Data Eksperimen</p>
     <h2>Tabel Perbandingan Volume Berbagai Reaksi Gas</h2>
-    <table class="vol-table">
-      <thead>
-        <tr><th>Reaksi</th><th>Gas A (vol)</th><th>Gas B (vol)</th><th>Produk (vol)</th><th>Rasio Bulat</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>H₂ + Cl₂ → 2HCl</td>
-          <td>1 (H₂)</td><td>1 (Cl₂)</td><td class="hl">2 (HCl)</td><td class="hl">1:1:2</td>
-        </tr>
-        <tr>
-          <td>N₂ + 3H₂ → 2NH₃</td>
-          <td>1 (N₂)</td><td>3 (H₂)</td><td class="hl">2 (NH₃)</td><td class="hl">1:3:2</td>
-        </tr>
-        <tr>
-          <td>2H₂ + O₂ → 2H₂O</td>
-          <td>2 (H₂)</td><td>1 (O₂)</td><td class="hl">2 (H₂O uap)</td><td class="hl">2:1:2</td>
-        </tr>
-        <tr>
-          <td>2CO + O₂ → 2CO₂</td>
-          <td>2 (CO)</td><td>1 (O₂)</td><td class="hl">2 (CO₂)</td><td class="hl">2:1:2</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table class="vol-table">
+        <thead>
+          <tr><th>Reaksi</th><th>Gas A (vol)</th><th>Gas B (vol)</th><th>Produk (vol)</th><th>Rasio Bulat</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>H₂ + Cl₂ → 2HCl</td>
+            <td>1 (H₂)</td><td>1 (Cl₂)</td><td class="hl">2 (HCl)</td><td class="hl">1:1:2</td>
+          </tr>
+          <tr>
+            <td>N₂ + 3H₂ → 2NH₃</td>
+            <td>1 (N₂)</td><td>3 (H₂)</td><td class="hl">2 (NH₃)</td><td class="hl">1:3:2</td>
+          </tr>
+          <tr>
+            <td>2H₂ + O₂ → 2H₂O</td>
+            <td>2 (H₂)</td><td>1 (O₂)</td><td class="hl">2 (H₂O uap)</td><td class="hl">2:1:2</td>
+          </tr>
+          <tr>
+            <td>CO + ½O₂ → CO₂</td>
+            <td>2 (CO)</td><td>1 (O₂)</td><td class="hl">2 (CO₂)</td><td class="hl">2:1:2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section>
